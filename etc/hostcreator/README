@@ -1,0 +1,13 @@
+You can create host install hooks inside this directory.
+
+The first one is /etc/hostcreator/postunpack.sh which
+is called after debootstrapping and mounting the initial
+filesystem.
+
+The second one is /etc/hostcreator/postconfig.sh which
+is called after chrooted configuring the new vm.
+
+Both hooks are called if existing with two additional
+parameters:
+1. The vm name
+2. The mount point of the root filesystem of the vm.

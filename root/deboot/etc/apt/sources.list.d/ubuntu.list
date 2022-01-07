@@ -1,0 +1,2 @@
+deb http://de.archive.ubuntu.com/ubuntu/ %DISTR%-updates main restricted universe multiverse
+deb http://de.archive.ubuntu.com/ubuntu %DISTR%-security main restricted universe multiverse

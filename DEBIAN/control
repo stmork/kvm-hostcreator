@@ -1,0 +1,12 @@
+Package: kvm-hostcreator
+Version: 1.1.0-%BUILD%
+Section: universe/system
+Priority: optional
+Architecture: amd64
+Suggests: virt-manager, numactl, hwloc
+Depends: debootstrap (>=1.0.59~), gdisk, qemu-utils, e2fsprogs, lvm2,
+ libvirt-bin, qemu-kvm, qemu-system, virtinst, bridge-utils, ifenslave,
+ ssh-askpass, kpartx, psmisc
+Maintainer: MORKNet <webadmin@morknet.de>
+Homepage: https://intra.morknet.de/
+Description: This package provides scripts for creating KVM hosts.

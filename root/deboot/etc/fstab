@@ -1,0 +1,4 @@
+# <file system>	<mount point>	<type>	<options>		<dump>	<pass>
+
+/dev/vda2	none		swap	sw			0	0
+/dev/vda3	/		ext4	errors=remount-ro	0	1

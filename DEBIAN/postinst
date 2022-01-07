@@ -1,0 +1,40 @@
+#!/bin/bash
+
+#set -e
+
+SSH_BASE=$HOME/deboot/root/.ssh
+
+if [ ! -d $SSH_BASE ]
+then
+	mkdir -p $SSH_BASE
+	cp -a $HOME/.ssh/authorized_keys $SSH_BASE
+fi
+
+CONFIG=/etc/default/kvm-hostcreator
+
+test -e $CONFIG || touch $CONFIG
+
+. $CONFIG
+
+if [ -z $LIVE_ISO ]
+then
+	ARCH=`dpkg --print-architecture`
+	PATHS=`grep -h path /etc/libvirt/storage/*.xml|fgrep -v dev|sed -e 's/<[\/]*path>//g' -e 's/ //g'`
+	TMP=/tmp/iso
+
+	rm -f $TMP
+	for ISO_PATH in $PATHS
+	do
+		ls -rt $ISO_PATH/ubuntu*desktop*$ARCH.iso >>$TMP 2>/dev/null
+	done
+	echo LIVE_ISO=`tail -n1 $TMP` >>$CONFIG
+fi
+
+test -z $VG_NAME && vgs --noheadings -o vg_name --aligned --nameprefixes| sed -e 's/  LVM2_//g' >>$CONFIG
+test -z $SIZE    && echo "SIZE=10" >>$CONFIG
+test -z $DISTR   && echo "DISTR=trusty" >>$CONFIG
+test -z $NETWORK && echo "NETWORK=br0" >>$CONFIG
+
+gpg --list-keys >/dev/null
+
+rm -f $TMP
