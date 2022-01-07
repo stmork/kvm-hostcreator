@@ -1,3 +1,2 @@
 /root/deboot/etc/apt/apt.conf
-/root/deboot/etc/apt/sources.list.d/morknet.list
 /root/deboot/root/bin/install-custom.sh
