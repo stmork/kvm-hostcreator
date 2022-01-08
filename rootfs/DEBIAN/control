@@ -5,7 +5,7 @@ Priority: optional
 Architecture: amd64
 Suggests: virt-manager, numactl, hwloc
 Depends: debootstrap (>=1.0.59~), gdisk, qemu-utils, e2fsprogs, lvm2,
- libvirt-bin, qemu-kvm, qemu-system, virtinst, bridge-utils, ifenslave,
+ libvirt-clients, libvirt-daemon-system, qemu-kvm, qemu-system, virtinst, bridge-utils, ifenslave,
  ssh-askpass, kpartx, psmisc
 Maintainer: MORKNet <webadmin@morknet.de>
 Homepage: https://intra.morknet.de/
