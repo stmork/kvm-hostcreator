@@ -8,10 +8,10 @@ localedef -i de_DE -c -f UTF-8 de_DE.UTF-8
 echo "Europe/Berlin" >/etc/timezone
 dpkg-reconfigure --frontend noninteractive tzdata
 
-gpg --list-keys
-gpg --keyserver hkp://keys.gnupg.net --recv-keys 5DF9FE64265CF59A B1C9D94396E2F2AD
-gpg --export 5DF9FE64265CF59A | apt-key add -
-gpg --export B1C9D94396E2F2AD | apt-key add -
+#gpg --list-keys
+#gpg --keyserver hkp://keys.gnupg.net --recv-keys 5DF9FE64265CF59A B1C9D94396E2F2AD
+#gpg --export 5DF9FE64265CF59A | apt-key add -
+#gpg --export B1C9D94396E2F2AD | apt-key add -
 
 apt-get update
 apt-get dist-upgrade

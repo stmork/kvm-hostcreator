@@ -11,3 +11,4 @@ Both hooks are called if existing with two additional
 parameters:
 1. The vm name
 2. The mount point of the root filesystem of the vm.
+3. The distribution name
