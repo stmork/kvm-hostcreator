@@ -10,12 +10,10 @@ umask 022
 
 set -e
 
-mkdir -p ${BUILD}/DEBIAN
-sed -e "s/%BUILD%/${BUILD_NUMBER}/g" rootfs/DEBIAN/control > ${BUILD}/DEBIAN/control
-cp -a rootfs/DEBIAN/postinst ${BUILD}/DEBIAN
-cp -a rootfs/DEBIAN/conffiles ${BUILD}/DEBIAN
-rsync -a rootfs/root  ${BUILD}
-find ${BUILD} -type d -name .svn | xargs rm -rf
+rsync -a rootfs/  ${BUILD}/
+sed -i\
+   -e "s/%BUILD%/${BUILD_NUMBER}/g"\
+   ${BUILD}/DEBIAN/control
 
 VERSION=`grep Version ${BUILD}/DEBIAN/control | cut -d" " -f2`
 fakeroot dpkg -b ${BUILD} ${PACKAGE}_${VERSION}.deb

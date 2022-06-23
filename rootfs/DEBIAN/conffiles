@@ -1,2 +1,4 @@
+/etc/hostcreator/postconfig.sh
+/etc/hostcreator/postunpack.sh
 /root/deboot/etc/apt/apt.conf
 /root/deboot/root/bin/install-custom.sh

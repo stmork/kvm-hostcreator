@@ -62,7 +62,7 @@ test -d $MP || mkdir $MP
 mount $EXT4 $MP
 
 echo "### Installing $VM_NAME..."
-debootstrap --variant=minbase --include=gnupg2,tcsh --arch=amd64 $DISTR $MP http://ftp.de.debian.org/debian
+debootstrap --variant=minbase --include=gnupg2,tcsh,psmisc --arch=amd64 $DISTR $MP http://ftp.de.debian.org/debian
 
 echo "### Configuring distro $DISTR..."
 rsync -a $HOME/deboot/ $MP/
@@ -83,7 +83,7 @@ cp /proc/mounts $MP/etc/mtab
 if [ -x /etc/hostcreator/postunpack.sh ]
 then
 	echo "### Starting post unpack script..."
-	/etc/hostcreator/postunpack.sh $VM_NAME $MP
+	/etc/hostcreator/postunpack.sh $VM_NAME $MP $DISTR
 fi
 
 echo $VM_NAME >$MP/etc/hostname
@@ -97,7 +97,7 @@ chroot $MP /bin/bash -c "su - -c bin/install.sh"
 if [ -x /etc/hostcreator/postconfig.sh ]
 then
 	echo "### Starting post configuration script..."
-	/etc/hostcreator/postconfig.sh $VM_NAME $MP
+	/etc/hostcreator/postconfig.sh $VM_NAME $MP $DISTR
 fi
 
 echo "### Installing GRUB..."

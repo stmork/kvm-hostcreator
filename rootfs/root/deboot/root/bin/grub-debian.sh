@@ -1,8 +1,7 @@
 #!/bin/bash
 
 export DEBIAN_FRONTEND=noninteractive
-apt-get install linux-image-amd64
-apt-get install grub-pc
+apt-get install linux-image-amd64 grub-pc systemd-sysv
 
 grub-mkconfig -o /boot/grub/grub.cfg
 grub-install /dev/loop0
