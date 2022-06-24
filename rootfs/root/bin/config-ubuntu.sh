@@ -16,6 +16,6 @@ DISK=/dev/${VG_NAME}/${LV_NAME}
 MP=/tmp/mp-${VM_NAME}
 
 LOOP=`losetup -f | cut -d/ -f3`
+NBD=/dev/${LOOP}
 SWAP=/dev/mapper/${LOOP}p2
 EXT4=/dev/mapper/${LOOP}p3
-NBD=/dev/${LOOP}
