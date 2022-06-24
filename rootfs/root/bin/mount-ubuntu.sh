@@ -2,7 +2,12 @@
 
 . $HOME/bin/config-ubuntu.sh $@
 
-test -d $MP || mkdir $MP
+if mountpoint -q "${MP}"; then
+  echo "${VM_NAME} already mounted."
+  exit 0
+fi
+
+test -d $MP || mkdir -p $MP
 
 echo "Clear mount..."
 kpartx -d ${NBD}

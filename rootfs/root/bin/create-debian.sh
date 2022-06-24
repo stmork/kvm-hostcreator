@@ -11,6 +11,11 @@ fi
 
 . $HOME/bin/config-ubuntu.sh $@
 
+if mountpoint -q "${MP}"; then
+    echo "${VM_NAME} is mounted! Run umount-ubuntu.sh first."
+    exit 1
+fi
+
 if [ $# -ge 2 ]
 then
 	DISTR=$2
@@ -96,7 +101,7 @@ then
 fi
 
 echo "### Installing GRUB..."
-chroot $MP /bin/bash -c "su - -c bin/grub-debian.sh"
+chroot $MP /bin/bash -c "su - -c 'bin/grub-debian.sh ${NBD}'"
 
 # Going out...
 echo "### Unmounting..."

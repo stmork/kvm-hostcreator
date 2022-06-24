@@ -2,6 +2,14 @@
 
 . $HOME/bin/config-ubuntu.sh $@
 
+if ! mountpoint -q "${MP}"; then
+  echo "${VM_NAME} not mounted, nothing to do."
+  exit 0
+fi
+
+LOOP=`findmnt -oSOURCE ${MP} | tail -n1 | grep -oP "loop\d*"`
+NBD=/dev/${LOOP}
+
 umount $MP/proc
 umount $MP/sys
 umount $MP/dev/pts
