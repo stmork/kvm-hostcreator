@@ -101,7 +101,7 @@ then
 fi
 
 echo "### Installing GRUB..."
-chroot $MP /bin/bash -c "su - -c bin/grub-debian.sh"
+chroot $MP /bin/bash -c "su - -c bin/grub-debian.sh ${NBD}"
 
 # Going out...
 echo "### Unmounting..."
