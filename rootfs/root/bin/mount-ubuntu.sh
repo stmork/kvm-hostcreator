@@ -2,7 +2,7 @@
 
 . $HOME/bin/config-ubuntu.sh $@
 
-if [ ! -z ${MOUNTED} ]; then
+if mountpoint -q "${MP}"; then
   echo "${VM_NAME} already mounted."
   exit 0
 fi

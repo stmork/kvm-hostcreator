@@ -11,7 +11,7 @@ fi
 
 . $HOME/bin/config-ubuntu.sh $@
 
-if [ ! -z ${MOUNTED} ]; then
+if mountpoint -q "${MP}"; then
 	echo "${VM_NAME} is mounted! Run umount-ubuntu.sh first."
 	exit 1
 fi

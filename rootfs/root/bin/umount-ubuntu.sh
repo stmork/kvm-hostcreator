@@ -2,10 +2,12 @@
 
 . $HOME/bin/config-ubuntu.sh $@
 
-if [ -z ${MOUNTED} ]; then
+if ! mountpoint -q "${MP}"; then
   echo "${VM_NAME} not mounted, nothing to do."
   exit 0
 fi
+
+NBD=/dev/`df -h | grep ${MP} | grep -oP "loop\d*"`
 
 umount $MP/proc
 umount $MP/sys
