@@ -7,7 +7,8 @@ if ! mountpoint -q "${MP}"; then
   exit 0
 fi
 
-NBD=/dev/`df -h | grep ${MP} | grep -oP "loop\d*"`
+LOOP=`findmnt -oSOURCE ${MP} | tail -n1 | grep -oP "loop\d*"`
+NBD=/dev/${LOOP}
 
 umount $MP/proc
 umount $MP/sys
