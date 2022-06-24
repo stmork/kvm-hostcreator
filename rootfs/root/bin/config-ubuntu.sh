@@ -22,9 +22,11 @@ if [ -z ${MOUNTED} ]; then
 	LOOP=`losetup -f | cut -d/ -f3`
 	SWAP=/dev/mapper/${LOOP}p2
 	EXT4=/dev/mapper/${LOOP}p3
+	NBD=/dev/${LOOP}
 else
 	# The mount point has a loop device mounted.
 	LOOP=${MOUNTED}
+	SWAP=/dev/mapper/${LOOP}p2
+	EXT4=/dev/mapper/${LOOP}p3
+	NBD=/dev/${LOOP}
 fi
-
-NBD=/dev/${LOOP}
