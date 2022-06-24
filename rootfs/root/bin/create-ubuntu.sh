@@ -100,7 +100,7 @@ then
 fi
 
 echo "### Installing GRUB..."
-chroot $MP /bin/bash -c "su - -c bin/grub-ubuntu.sh ${NBD}"
+chroot $MP /bin/bash -c "su - -c 'bin/grub-ubuntu.sh ${NBD}'"
 
 # Going out...
 echo "### Unmounting..."
