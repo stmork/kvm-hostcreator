@@ -16,6 +16,6 @@ sed -i\
    ${BUILD}/DEBIAN/control
 
 VERSION=`grep Version ${BUILD}/DEBIAN/control | cut -d" " -f2`
-fakeroot dpkg -b ${BUILD} ${PACKAGE}_${VERSION}.deb
+fakeroot dpkg -b ${BUILD} ${PACKAGE}_${VERSION}_all.deb
 
 rm -rf ${BUILD}
