@@ -41,16 +41,19 @@ First the logical volume is created inside the volume group using the _VG_NAME_
 variable. The default size is _SIZE_ GiB. Both variables are configured in
 the file _/etc/default/kvm-hostcreator_. If the logical volume already
 exists nothing will happen. So you can manually create a bigger one before
-starting the creation process if needed.
+starting the creation process if needed. The naming scheme vor the logical
+volume name is _<VM_NAME>-disk01_ to allow adding of more disk images to the
+VM later.
 
 ## Partitioning and formatting the logical volume
-The logical volume iss used as a disk image. So this disk image must be
+The logical volume is used as a disk image. So this disk image must be
 partitioned using the GPT partitioning scheme. Before formatting the first
 one GiB is zeroed out to destroy existing partitions. This stage creates
 three partitions:
 1. GRUB (4 MiB)
 2. Swap (1020 MiB)
 3. The filesystem (rest)
+
 On GPT based partition tables GRUB needs its own partition for booting. 
 
 After partitioning the Swap partition is initialized and the root filesystem
@@ -66,7 +69,7 @@ URL.
 
 ## Copying raw filesystem structure
 After installing the base system the contents of the directory
-_/root/deboot&_ is copied recursively using _rsync_. This directory also
+_/root/deboot/_ is copied recursively using _rsync_. This directory also
 contains the post installation scripts which are called later using
 _chroot_. Feel free to add contents into that directory to customize to your
 needs such additional configuration files. It is a good place to add for
@@ -74,15 +77,18 @@ example a proxy server configuration to the _apt_ subsystem.
 
 There is a post copy feature which replaces all _%DISTR%_ token occurences
 in the files with the real _DISTR_ environment variable given by parameter
-or by default from the file _/etc/default/kvm-hostcreator_.
+or by default from the file _/etc/default/kvm-hostcreator_. So it is
+possible to add additional _sources.list_ files which may contain the
+distribution.
 
 Finally the file _/etc/resolv.conf_ is copied into the VM to ensure same
 hostname resolution as of the host.
 
 ## Postunpacking
 In this stage the file _/etc/hostcreator/postunpack.sh_ is called if
-existing. You can adjust this file as you needed. It is a good place to add
-additional APT keys using the _gpg2_ tool. The create scripts call this hook
+existing. You can adjust this file as you need. It is a good place to add
+additional APT key downloads using the _gpg2_ tool. The precedure may differ
+depending on what software sites you use. The create scripts call this hook
 with the virtual hostname as the first parameter, the temporal mount point
 as the second parameter and the _DISTR_ variable as the third parameter.
 
@@ -116,8 +122,8 @@ The final stage installs the Linux kernel an configures GRUB. The script
 _/root/bin/grub-debian.sh_ or _/root/bin/grub-ubuntu.sh_ respectively is
 called chrooted inside the VM for this purpose.
 
-After installing grub all mount points necessary for installation is
-unmounted and completed hopefully successfully.
+After installing grub all mount points necessary for installation are
+unmounted and completed hopefully successful.
 
 ## Starting the VM for the first time
 After installation you can configure the VM on your own using the
