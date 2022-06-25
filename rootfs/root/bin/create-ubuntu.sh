@@ -11,7 +11,8 @@ fi
 
 . $HOME/bin/config-ubuntu.sh $@
 
-if mountpoint -q "${MP}"; then
+if mountpoint -q "${MP}"
+then
 	echo "${VM_NAME} is mounted! Run umount-ubuntu.sh first."
 	exit 1
 fi
@@ -82,7 +83,7 @@ cp /proc/mounts $MP/etc/mtab
 if [ -x /etc/hostcreator/postunpack.sh ]
 then
 	echo "### Starting post unpack script..."
-	/etc/hostcreator/postunpack.sh $VM_NAME $MP
+	/etc/hostcreator/postunpack.sh $VM_NAME $MP $DISTR
 fi
 
 echo $VM_NAME >$MP/etc/hostname
@@ -96,7 +97,7 @@ chroot $MP /bin/bash -c "su - -c bin/install.sh"
 if [ -x /etc/hostcreator/postconfig.sh ]
 then
 	echo "### Starting post configuration script..."
-	/etc/hostcreator/postconfig.sh $VM_NAME $MP
+	/etc/hostcreator/postconfig.sh $VM_NAME $MP $DISTR
 fi
 
 echo "### Installing GRUB..."

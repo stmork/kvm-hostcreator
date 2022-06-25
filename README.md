@@ -83,8 +83,8 @@ hostname resolution as of the host.
 In this stage the file _/etc/hostcreator/postunpack.sh_ is called if
 existing. You can adjust this file as you needed. It is a good place to add
 additional APT keys using the _gpg2_ tool. The create scripts call this hook
-with the virtual hostname as the first parameter and the temporal mount point
-as the second parameter.
+with the virtual hostname as the first parameter, the temporal mount point
+as the second parameter and the _DISTR_ variable as the third parameter.
 
 This is also the stage where the virtual hostname is configured and some
 useful aliases are added to the root users bash profile file.
@@ -107,7 +107,9 @@ demands.
 
 ## Postconfiguration
 After that there is another hook in file _/etc/hostcreator/postconfig.sh_ on
-host side which is called now if existing.
+host side which is called now if existing. The create scripts call this hook
+with the virtual hostname as the first parameter, the temporal mount point
+as the second parameter and the _DISTR_ variable as the third parameter.
 
 ## Installing GRUB
 The final stage installs the Linux kernel an configures GRUB. The script
