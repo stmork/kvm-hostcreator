@@ -7,7 +7,7 @@ The disk image uses one logical volume so LVM has to be already setup. Since
 KVM/qemu/libvirt mostly connects the VMs to a bridge a bridging network
 interface has also already to be installed correctly.
 
-# The configuration
+## The configuration
 The configuration resides in the file _/etc/default/kvm-hostcreator_. the
 file configures the following environment variables to customize the basic
 installation of a VM.
@@ -18,7 +18,7 @@ installation of a VM.
 5. _LIVE_ISO_: The live iso image to use when starting the VM the first
 time.
 
-# The tools
+## The tools
 1. Creating an Ubuntu VM with create-ubuntu.sh
 2. Creating a Debian VM with create-debian.sh
 3. Initial creation of a VM using create-kvm.sh
@@ -73,10 +73,54 @@ needs such additional configuration files. It is a good place to add for
 example a proxy server configuration to the _apt_ subsystem.
 
 There is a post copy feature which replaces all _%DISTR%_ token occurences
-with the real _DISTR_ environment variable given by parameter or by default
-from the file _/etc/default/kvm-hostcreator_.
+in the files with the real _DISTR_ environment variable given by parameter
+or by default from the file _/etc/default/kvm-hostcreator_.
+
+Finally the file _/etc/resolv.conf_ is copied into the VM to ensure same
+hostname resolution as of the host.
 
 ## Postunpacking
+In this stage the file _/etc/hostcreator/postunpack.sh_ is called if
+existing. You can adjust this file as you needed. It is a good place to add
+additional APT keys using the _gpg2_ tool. The create scripts call this hook
+with the virtual hostname as the first parameter and the temporal mount point
+as the second parameter.
+
+This is also the stage where the virtual hostname is configured and some
+useful aliases are added to the root users bash profile file.
+
 ## Postinstallation
+There are some jobs needed in a chrooted environment on the newly created
+virtual machine. Now the create scripts start the
+_/root/deboot/root/bin/install.sh_ script which is already copied earlier
+through the raw copy stage and appears in the VM as file
+_/root/bin/install.sh_.
+
+The intention of that script is to configure date time and language
+settings. After that stage the APT subsystem has already updated the package
+revision database and upgraded pending updates.
+
+If the script _/root/bin/install-custom.sh_ exists in the filesystem it is
+called to add installation of packages you need additionally. So adjust the
+file _/root/deboot/root/bin/install-custom.sh_ prior VM creation on your
+demands.
+
 ## Postconfiguration
+After that there is another hook in file _/etc/hostcreator/postconfig.sh_ on
+host side which is called now if existing.
+
 ## Installing GRUB
+The final stage installs the Linux kernel an configures GRUB. The script
+_/root/bin/grub-debian.sh_ or _/root/bin/grub-ubuntu.sh_ respectively is
+called chrooted inside the VM for this purpose.
+
+After installing grub all mount points necessary for installation is
+unmounted and completed hopefully successfully.
+
+## Starting the VM for the first time
+After installation you can configure the VM on your own using the
+_virt-manager_ tool or you can call the _create-kvm.sh_ script once to
+create a KVM/qemu instance and start it. When you call the script you have
+to add the virtual hostname to the script.
+
+Note that an existing KVM/qemu instance is _not_ overwritten!
