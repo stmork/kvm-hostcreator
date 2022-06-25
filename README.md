@@ -19,11 +19,11 @@ installation of a VM.
 time.
 
 ## The tools
-1. Creating an Ubuntu VM with create-ubuntu.sh
-2. Creating a Debian VM with create-debian.sh
-3. Initial creation of a VM using create-kvm.sh
-3. Mounting a VM with mount-ubuntu.sh
-4. Unmounting a VM with umount-ubuntu.sh
+1. Creating an Ubuntu VM with _create-ubuntu.sh_
+2. Creating a Debian VM with _create-debian.sh_
+3. Initial creation of a VM using _create-kvm.sh_
+3. Mounting a VM with _mount-ubuntu.sh_
+4. Unmounting a VM with _umount-ubuntu.sh_
 
 # The installation process
 The installation process proceeds through different stages which are
@@ -41,7 +41,7 @@ First the logical volume is created inside the volume group using the _VG_NAME_
 variable. The default size is _SIZE_ GiB. Both variables are configured in
 the file _/etc/default/kvm-hostcreator_. If the logical volume already
 exists nothing will happen. So you can manually create a bigger one before
-starting the creation process if needed. The naming scheme vor the logical
+starting the creation process if needed. The naming scheme for the logical
 volume name is _<VM_NAME>-disk01_ to allow adding of more disk images to the
 VM later.
 
@@ -118,7 +118,7 @@ with the virtual hostname as the first parameter, the temporal mount point
 as the second parameter and the _DISTR_ variable as the third parameter.
 
 ## Installing GRUB
-The final stage installs the Linux kernel an configures GRUB. The script
+The final stage installs the Linux kernel and configures GRUB. The script
 _/root/bin/grub-debian.sh_ or _/root/bin/grub-ubuntu.sh_ respectively is
 called chrooted inside the VM for this purpose.
 
