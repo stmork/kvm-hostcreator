@@ -103,19 +103,29 @@ through the raw copy stage and appears in the VM as file
 _/root/bin/install.sh_.
 
 The intention of that script is to configure date time and language
-settings. After that stage the APT subsystem has already updated the package
-revision database and upgraded pending updates.
+settings. Additionally the automiatic service start is disabled because this
+would take place in the hosts runtime environment which is not intended.
+After that stage the APT subsystem has already updated the package revision
+database and upgraded pending updates.
 
 If the script _/root/bin/install-custom.sh_ exists in the filesystem it is
 called to add installation of packages you need additionally. So adjust the
 file _/root/deboot/root/bin/install-custom.sh_ prior VM creation on your
-demands.
+demands. Since the surrounding _install.sh_ script disables automatic
+service start it is a good place to install additional packages on your
+needs.
+
+Finally the automatic service start is reactivated to allow them when
+booting the VM itself.
 
 ## Postconfiguration
 After that there is another hook in file _/etc/hostcreator/postconfig.sh_ on
 host side which is called now if existing. The create scripts call this hook
 with the virtual hostname as the first parameter, the temporal mount point
 as the second parameter and the _DISTR_ variable as the third parameter.
+
+At this point you can do some cleanup work but mostly everything is already
+done.
 
 ## Installing GRUB
 The final stage installs the Linux kernel and configures GRUB. The script
