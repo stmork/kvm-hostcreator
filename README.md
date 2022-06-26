@@ -115,6 +115,9 @@ demands. Since the surrounding _install.sh_ script disables automatic
 service start it is a good place to install additional packages on your
 needs.
 
+It is also a possible to set the root password. But I recommend setting the
+needed ssh public keys via the raw copy stage for security reasons instead.
+
 Finally the automatic service start is reactivated to allow them when
 booting the VM itself.
 
