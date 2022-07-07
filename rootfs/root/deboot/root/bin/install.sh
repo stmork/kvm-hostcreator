@@ -4,8 +4,8 @@
 dpkg-divert --local --rename --add /sbin/initctl
 ln -sf /bin/true /sbin/initctl
 
-# localedef -i de_DE -c -f UTF-8 de_DE.UTF-8 
-echo "Europe/Berlin" >/etc/timezone
+timedatectl set-timezone Europe/Berlin
+ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 dpkg-reconfigure --frontend noninteractive tzdata
 
 apt-get update
@@ -24,7 +24,7 @@ apt-get clean
 ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 locale-gen de_DE.UTF-8
 localedef -i de_DE -c -f UTF-8 de_DE.UTF-8 
-dpkg-reconfigure --frontend noninteractive locales
+update-locale LANG=de_DE.UTF-8
 
 # Start der Dienste wieder reaktivieren
 rm /sbin/initctl
