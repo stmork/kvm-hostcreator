@@ -21,7 +21,6 @@ fi
 apt-get clean
 
 # Setting locale and time zone.
-ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 locale-gen de_DE.UTF-8
 localedef -i de_DE -c -f UTF-8 de_DE.UTF-8 
 update-locale LANG=de_DE.UTF-8
