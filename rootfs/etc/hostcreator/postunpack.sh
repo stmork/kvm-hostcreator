@@ -1,4 +1,8 @@
 #!/bin/bash
+#
+# SPDX-FileCopyrightText: © 2022 Steffen A. Mork
+# SPDX-License-Identifier: MIT
+#
 
 VM_NAME=$1
 MP=$2

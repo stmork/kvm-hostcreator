@@ -1,4 +1,8 @@
 #!/bin/bash
+#
+# SPDX-FileCopyrightText: © 2022 Steffen A. Mork
+# SPDX-License-Identifier: MIT
+#
 
 # Start der Dienste deaktivieren
 dpkg-divert --local --rename --add /sbin/initctl
