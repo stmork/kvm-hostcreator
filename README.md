@@ -86,14 +86,23 @@ hostname resolution as of the host.
 
 ## Postunpacking
 In this stage the file _/etc/hostcreator/postunpack.sh_ is called if
-existing. You can adjust this file as you need. It is a good place to add
-additional APT key downloads using the _gpg2_ tool. The precedure may differ
-depending on what software sites you use. The create scripts call this hook
-with the virtual hostname as the first parameter, the temporal mount point
-as the second parameter and the _DISTR_ variable as the third parameter.
+existing. The create scripts call this hook with the virtual hostname as the
+first parameter, the temporal mount point as the second parameter and the
+_DISTR_ variable as the third parameter.
 
-This is also the stage where the virtual hostname is configured and some
-useful aliases are added to the root users bash profile file.
+You can adjust this file as you need. It is a good place to add additional
+GPG key downloads using the _gpg2_ tool. The precedure may differ depending
+on what software sites you use. Since the _apt-key_ usage in Ubuntu/Debian
+distros has been deprecated. You have to download the key files into the
+target's _/etc/apt/trusted.gpg.d/_ folder and have to reference it in the
+sources definition file like that (all from target's point of view):
+
+```
+deb [signed-by=/etc/apt/trusted.gpg.d/example.gpg] http://<...>
+```
+
+After calling the post unpack script the virtual hostname is configured and
+some useful aliases are added to the root users bash profile file.
 
 ## Postinstallation
 There are some jobs needed in a chrooted environment on the newly created
