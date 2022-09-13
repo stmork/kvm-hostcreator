@@ -7,6 +7,7 @@
 PACKAGE=kvm-hostcreator
 BUILD=$PWD/target
 BUILD_NUMBER=${BUILD_NUMBER:=0}
+COPYRIGHT=${BUILD}/usr/share/doc/${PACKAGE}/copyright
 
 mkdir -p ${BUILD}
 rm -f *.deb
@@ -21,7 +22,13 @@ sed -i\
 
 mkdir -p          ${BUILD}/usr/share/doc/${PACKAGE}/
 cp -a README.md   ${BUILD}/usr/share/doc/${PACKAGE}/
-cp -a LICENSE.md  ${BUILD}/usr/share/doc/${PACKAGE}/copyright
+
+echo "Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/" > $COPYRIGHT
+echo "Upstream-Name: $PACKAGE" >> $COPYRIGHT
+echo "Files: *" >> ${COPYRIGHT}
+echo "Copyright: 2005-`date +'%Y'` (C) Steffen A. Mork" >> ${COPYRIGHT}
+echo -n "License:" >> ${COPYRIGHT}
+sed -e 's/^/ /g' LICENSE.md >> ${COPYRIGHT}
 
 VERSION=`grep Version ${BUILD}/DEBIAN/control | cut -d" " -f2`
 fakeroot dpkg -b ${BUILD} ${PACKAGE}_${VERSION}_all.deb
