@@ -28,7 +28,7 @@ echo "Upstream-Name: $PACKAGE" >> $COPYRIGHT
 echo "Files: *" >> ${COPYRIGHT}
 echo "Copyright: 2005-`date +'%Y'` (C) Steffen A. Mork" >> ${COPYRIGHT}
 echo "License: MIT" >> ${COPYRIGHT}
-sed -e 's/^/ /g' -e 's/^[[:space:]]*$/ \./g' LICENSE.md >> ${COPYRIGHT}
+sed -e 's/^$/\./g' -e 's/^/ /g' LICENSE.md >> ${COPYRIGHT}
 
 VERSION=`grep Version ${BUILD}/DEBIAN/control | cut -d" " -f2`
 fakeroot dpkg -b ${BUILD} ${PACKAGE}_${VERSION}_all.deb
