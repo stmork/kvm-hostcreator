@@ -24,7 +24,9 @@ mkdir -p          ${BUILD}/usr/share/doc/${PACKAGE}/
 cp -a README.md   ${BUILD}/usr/share/doc/${PACKAGE}/
 
 echo "Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/" > $COPYRIGHT
-echo "Upstream-Name: $PACKAGE" >> $COPYRIGHT
+echo "Upstream-Name: $PACKAGE" >> ${COPYRIGHT}
+echo "Source: https://github.com/stmork/kvm-hostcreator" >> ${COPYRIGHT}
+echo "" >> ${COPYRIGHT}
 echo "Files: *" >> ${COPYRIGHT}
 echo "Copyright: 2005-`date +'%Y'` (C) Steffen A. Mork" >> ${COPYRIGHT}
 echo "License: MIT" >> ${COPYRIGHT}
