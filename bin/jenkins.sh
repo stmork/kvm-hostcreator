@@ -27,7 +27,7 @@ echo "Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 echo "Upstream-Name: $PACKAGE" >> $COPYRIGHT
 echo "Files: *" >> ${COPYRIGHT}
 echo "Copyright: 2005-`date +'%Y'` (C) Steffen A. Mork" >> ${COPYRIGHT}
-echo -n "License:" >> ${COPYRIGHT}
+echo "License: MIT" >> ${COPYRIGHT}
 sed -e 's/^/ /g' LICENSE.md >> ${COPYRIGHT}
 
 VERSION=`grep Version ${BUILD}/DEBIAN/control | cut -d" " -f2`
