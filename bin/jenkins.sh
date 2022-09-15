@@ -17,8 +17,8 @@ set -e
 
 rsync -a rootfs/  ${BUILD}/
 sed -i\
-   -e "s/%BUILD%/${BUILD_NUMBER}/g"\
-   ${BUILD}/DEBIAN/control
+	-e "s/%BUILD%/${BUILD_NUMBER}/g"\
+	${BUILD}/DEBIAN/control
 
 mkdir -p          ${BUILD}/usr/share/doc/${PACKAGE}/
 cp -a README.md   ${BUILD}/usr/share/doc/${PACKAGE}/
